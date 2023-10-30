@@ -9,6 +9,7 @@ const Sidebar = () => {
     // useEffect(() => {
     //     getSubscriptions();
     // }, []);
+    
 
     // const getSubscriptions = async () => {
     //     const data = await fetch(SUBSCRIPTIONS_API);
