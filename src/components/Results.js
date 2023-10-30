@@ -11,7 +11,7 @@ const Results = () => {
     console.log(searchParams.get("search_query"));
     useEffect(() => {
         getSearchResults();
-    }, []);
+    }, [searchParams.get("search_query")]);
 
     const getSearchResults = async () => {
         const data = await fetch(SEARCH_RESULT_API + searchParams.get("search_query"));
@@ -22,7 +22,7 @@ const Results = () => {
 
     return (
         <div className='ml-[210px]'>
-            {results.map((r, index) => <Link key={index} to={"/watch?v=" + r.id.videoId}><ResultCard info={r} /></Link>)
+            {results.map((r, index) => <Link key={index} to={"/watch?v=" + r.id.videoId + "&sq_ch=" + r.snippet.channelId}><ResultCard info={r} /></Link>)
             }
         </div >
     )

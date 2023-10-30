@@ -2,7 +2,7 @@ import React, { useEffect, useState, } from "react";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { Link, useSearchParams } from "react-router-dom";
-import { SEARCH_RESULT_API, VIDEO_API } from "../utils/constants";
+import { SEARCH_RESULT_API, SHORTS_API, VIDEO_API } from "../utils/constants";
 import CommentsContainer from "./CommentsContainer";
 import SuggestionVideo from "./SuggestionVideo";
 import LiveChat from "./LiveChat";
@@ -29,13 +29,14 @@ const WatchPage = () => {
     const [suggestedVideos, setSuggestedVideos] = useState([]);
     const [searchParams] = useSearchParams();
     const [showChat, setShowChat] = useState(false);
-    const [chat, setChat] = useState("show chat replay");
+    const [chat, setChat] = useState("Show chat replay");
+    const [like, setLike] = useState(false);
+    const [subscribe, setSubscribe] = useState("Subscribe");
 
     useEffect(() => {
         dispatch(closeMenu());
         getVideoDeatils();
         getSuggestedVideos();
-
     }, [searchParams.get("v")]);
 
 
@@ -54,24 +55,43 @@ const WatchPage = () => {
         const res = await fetch(SEARCH_RESULT_API + searchParams.get("sq_ch"));
 
         const sugg = await res.json();
-        console.log(sugg.items);
+        //console.log(sugg.items);
         setSuggestedVideos(sugg.items);
 
     }
 
 
 
-    // function formatNumberWithCommas(number) {
-    //     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // }
 
 
+
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    const likeHandler = () => {
+        setLike(!like);
+    }
+    const subscribeHandler = () => {
+        if (subscribe === "Subscribe") {
+            setSubscribe("Subscribed");
+        }
+        else {
+            setSubscribe("Subscribe");
+        }
+    }
     const toggleDescription = () => {
         setShowDescription(!showDescription);
     }
 
     const showChatHandler = () => {
         setShowChat(!showChat);
+        if (chat === "Show chat replay") {
+            setChat("Hide chat replay");
+        }
+        else {
+            setChat("Show chat replay")
+        }
+
     }
 
 
@@ -83,20 +103,21 @@ const WatchPage = () => {
                         width="1000"
                         height="500"
                         className="rounded-lg"
-                        src={"https://www.youtube.com/embed/" + searchParams.get("v")}
+                        src={"https://www.youtube.com/embed/" + searchParams.get("v") + "?autoplay=1&cc_load_policy=1&"}
                         title="YouTube video player"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
+                        autoPlay
                     ></iframe>
                 </div>
                 <div>
                     <h1 className="ml-5 p-5 pt-0 font-bold text-xl">{videoDetails?.snippet?.title}</h1>
                     <div className="flex flex-row">
-                        <h1 className="text-xl font-semibold ml-9 pl-8">{videoDetails?.snippet?.channelTitle}</h1>
-                        <button className="bg-gray-900 ml-2 w-24 rounded-full h-9 text-white font-bold">Subscribe</button>
+                        <h1 className="text-xl font-semibold ml-9 pl-8">{"[" + videoDetails?.snippet?.channelTitle + "]"}</h1>
+                        <button className="bg-gray-900 ml-2 w-24 rounded-full h-9 text-white font-bold" onClick={() => subscribeHandler()}>{subscribe}</button>
                         <div className="ml-[15rem] flex">
-                            <div className="h-10 flex flex-row cursor-pointer border border-black rounded-l-full">
+                            <div className={like ? "h-10 flex flex-row cursor-pointer border bg-blue-500 border-black rounded-l-full" : "h-10 flex flex-row cursor-pointer border border-black rounded-l-full"} onClick={() => likeHandler()}>
                                 <img alt="like" className="ml-3 mt-1 h-8 bg-gray-600" src="https://logowik.com/content/uploads/images/940_like_icon.jpg" />
                                 <h1 className="m-2 ml-1 font-semibold">Like</h1>
                             </div>
@@ -112,8 +133,10 @@ const WatchPage = () => {
                         </div>
                     </div>
                     <div onClick={() => toggleDescription()} className="ml-8 mt-3 p-3 cursor-pointer bg-gray-100 shadow-sm rounded-lg w-[64rem]">
-                        <h1 className=" font-semibold ">{videoDetails?.statistics?.viewCount} views</h1>
-
+                        <div className="flex ">
+                            <h1 className=" font-semibold ">{videoDetails?.statistics?.viewCount} views</h1>
+                            <h1 className="font-semibold ml-5">{videoDetails?.statistics?.likeCount / 1000}k Likes</h1>
+                        </div>
                         {showDescription && <p className="p-3 text-gray-900">{videoDetails?.snippet?.description}</p>}
                     </div>
                     <div className="w-[1000]">
@@ -123,16 +146,21 @@ const WatchPage = () => {
 
             </div>
             <div className="flex flex-col ml-20">
-                <div className="cursor-pointer bg-gray-400" >
-                    <h1 className="font-bold p-2" onClick={() => showChatHandler()}>show chat replay</h1>
+                {/* {
+                    videoDetails?.snippet?.liveBroadcastContent !== "none" && 
+                } */}
+                <div className="cursor-pointer bg-gray-400 text-center rounded-lg" >
+                    <h1 className="font-bold p-2" onClick={() => showChatHandler()}>{chat}</h1>
                     {
                         showChat && <div className="">
                             <LiveChat />
                         </div>
                     }
                 </div>
+
+
                 <div className="">
-                    {suggestedVideos[0] && suggestedVideos.map((s, index) => <Link to={"/watch?v=" + s.id.videoId + "&sq_ch=" + s.snippet.channelId}><SuggestionVideo info={s} key={index} /></Link>)}
+                    {suggestedVideos[0] && suggestedVideos.map((s, index) => <Link to={"/watch?v=" + s.id.videoId + "&sq_ch=" + s.snippet.channelId} key={index} ><SuggestionVideo info={s} /></Link>)}
                 </div>
             </div>
         </div>

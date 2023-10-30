@@ -15,7 +15,7 @@ const ResultCard = ({ info }) => {
                 <p className='font-semibold mb-1 mt-1'>{title}</p>
                 <p className='font-bold mt-1 mb-1'>{channelTitle}</p>
                 <p className='mt-1 mb-1'>{publishTime}</p>
-                <p>{videoId}</p>
+                {/* <p>{videoId}</p> */}
             </div>
 
         </div>

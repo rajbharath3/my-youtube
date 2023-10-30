@@ -19,7 +19,7 @@ const commentsData = [
                                 replies: [
                                     {
                                         name: "Bharath Raj",
-                                        text: "Hi bro",
+                                        text: "Great video! 👍",
                                         replies: [
 
                                         ]
@@ -29,7 +29,7 @@ const commentsData = [
                         ]
                     }, {
                         name: "Naveen virat",
-                        text: "fuck yourself",
+                        text: "Great video! 👍",
                         replies: [
 
                         ]
