@@ -41,9 +41,9 @@ const Sidebar = () => {
                 <Link to={"/results?search_query=learnings"}><li>Learnings</li></Link>
                 <Link to={"/results?search_query=Fashion"}><li>Fashion</li></Link>
                 <Link to={"/results?search_query=Cooking"}><li>Cooking</li></Link>
-                <Link to={"/results?search_query=UnqGamer"}><li>UnqGamer</li></Link>
-                <Link to={"/results?search_query=TeluguGamer"}><li>TeluguGamer</li></Link>
-                <Link to={"/results?search_query=Naa Anveshana"}><li>Naa Anveshana</li></Link>
+                <Link to={"/results?search_query=take u forward"}><li>Take u forward</li></Link>
+                <Link to={"/results?search_query=akshay saini"}><li>Akshay Saini</li></Link>
+                <Link to={"/results?search_query=geeks for geeks"}><li>geeks for geeks</li></Link>
 
 
 
