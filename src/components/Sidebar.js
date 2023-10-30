@@ -44,7 +44,7 @@ const Sidebar = () => {
                 <Link to={"/results?search_query=Cooking"}><li>Cooking</li></Link>
                 <Link to={"/results?search_query=take u forward"}><li>Take u forward</li></Link>
                 <Link to={"/results?search_query=akshay saini"}><li>Akshay Saini</li></Link>
-                <Link to={"/results?search_query=geeks for geeks"}><li>geeks for geeks</li></Link>
+                <Link to={"/results?search_query=geeks for geeks"}><li>Geeks For Geeks</li></Link>
 
 
 
