@@ -9,7 +9,7 @@ import MainContainer from './components/MainContainer';
 import WatchPage from './components/WatchPage';
 import Results from './components/Results';
 
-const appRouter = createBrowserRouter([{
+export const appRouter = createBrowserRouter([{
   path: '/',
   element: <App />,
   children: [
