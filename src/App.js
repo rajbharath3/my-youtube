@@ -30,21 +30,14 @@ const appRouter = createBrowserRouter([{
 
 function App() {
   return (
-    <Provider store={store}>
+   
       <div>
         <Head />
-        <RouterProvider router={appRouter} />
-        {/* Head
-        Body
-          Sidebar
-            Menulist
-          MainContainer
-            ButtonList
-            VideoContainer
-              Videocard */}
+        
+       <Body />
       </div>
 
-    </Provider>
+    
   );
 }
 
