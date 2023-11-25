@@ -11,7 +11,7 @@ import Results from './components/Results';
 
 const appRouter = createBrowserRouter([{
   path: '/',
-  element: <Body />,
+  element: <App />,
   children: [
     {
       path: "/",
