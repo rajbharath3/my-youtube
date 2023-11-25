@@ -4,6 +4,8 @@ import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -91,11 +93,11 @@ const Head = () => {
                         <ul>
                             {suggestions.map((s, index) => s[0] && (
                                 <li
-                                    onClick={() => window.location.href = "/results?search_query=" + s}
+                                    onClick={() =>}
                                     key={index}
                                     className="py-2 px-3 shadow-sm hover:bg-gray-200"
                                 >
-                                    🔍 {s}
+                                    <Link to={`/results?q=${s}`} >🔍{s}</Link>
                                 </li>
                             ))}
                         </ul>
