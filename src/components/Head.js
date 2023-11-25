@@ -97,7 +97,7 @@ const Head = () => {
                                     key={index}
                                     className="py-2 px-3 shadow-sm hover:bg-gray-200"
                                 >
-                                    <Link to={`/results?q=${s}`} >🔍{s}</Link>
+                                    <Link to={`/results?search_query=${s}`} >🔍{s}</Link>
                                 </li>
                             ))}
                         </ul>
