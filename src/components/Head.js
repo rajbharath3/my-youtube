@@ -77,7 +77,7 @@ const Head = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setShowSuggestions(true)}
-                    onBlur={() => setShowSuggestions(false)}
+                    // onBlur={() => setShowSuggestions(false)}
                     onKeyDown={(e) => {
                         if (e.keyCode === 13) {
                             window.location.href = "/results?search_query=" + searchQuery;
